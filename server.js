@@ -10,23 +10,25 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+    res.send('Hello World!')
 })
 
 //send mail api 
-app.post('/send-mail', async (req,res) => {
-    const {name,email,message} = req.body
-    if(!name || !email || !message) {
-        return res.status(400).json({msg: "All fields required"})
+app.post('/send-mail', async (req, res) => {
+    const { name, email, message } = req.body
+    if (!name || !email || !message) {
+        return res.status(400).json({ msg: "All fields required" })
     }
 
     try {
         //SMTP Exporter
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: "smtp-relay.brevo.com",
+            port: 587,
+            secure: false,
             auth: {
                 user: "vernittyagi@gmail.com",
-                pass: "mbfk mapx bjww lyzy"
+                pass: "xsmtpsib-55c19f75a629c93bea0ed06f86d8408b69833ff06ea78820a159f1856d645540-VtDM7blwz3m1kUfV"
             }
         })
         //Email body 
@@ -50,5 +52,5 @@ app.post('/send-mail', async (req,res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`)
 })
