@@ -28,7 +28,7 @@ app.post('/send-mail', async (req, res) => {
             secure: false,
             auth: {
                 user: "vernittyagi@gmail.com",
-                pass: "xsmtpsib-55c19f75a629c93bea0ed06f86d8408b69833ff06ea78820a159f1856d645540-VtDM7blwz3m1kUfV"
+                pass: "xsmtpsib-55c19f75a629c93bea0ed06f86d8408b69833ff06ea78820a159f1856d645540-FIo7s8o5BnuwgZrc"
             }
         })
         //Email body 
