@@ -1,13 +1,13 @@
 import express from 'express';
 import cors from "cors";
-import nodemailer from "nodemailer";
-
+import { Resend } from 'resend';
 
 const app = express()
 const port = 3000
 app.use(cors())
 app.use(express.json());
 
+const resend = new Resend('re_VUFgUUNo_APMEHuX9tc1iB6yyfUy2YVAG');
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
@@ -21,19 +21,9 @@ app.post('/send-mail', async (req, res) => {
     }
 
     try {
-        //SMTP Exporter
-        const transporter = nodemailer.createTransport({
-            host: "smtp-relay.brevo.com",
-            port: 587,
-            secure: false,
-            auth: {
-                user: "vernittyagi@gmail.com",
-                pass: "xsmtpsib-55c19f75a629c93bea0ed06f86d8408b69833ff06ea78820a159f1856d645540-FIo7s8o5BnuwgZrc"
-            }
-        })
         //Email body 
         const mailOptions = {
-            from: "vernittyagi@gmail.com",
+            from: "onboarding@resend.dev",
             to: "vernittyagi@gmail.com",
             subject: "New Contact Form Submission",
             html: `
@@ -43,7 +33,7 @@ app.post('/send-mail', async (req, res) => {
                 <p><strong>Message:</strong>${message}</p>
             `,
         };
-        await transporter.sendMail(mailOptions);
+        await resend.emails.send(mailOptions);
         res.json({ success: true, msg: "Email sent successfully" })
     } catch (err) {
         console.log(err);
